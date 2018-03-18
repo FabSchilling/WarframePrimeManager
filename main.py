@@ -1,4 +1,4 @@
-from table_wanted_functions import getListOfPartsFromWanted
+from table_wanted_functions import getListOfPartsFromWanted, removePartFromWanted
 from relic_functions import findRelicForPartList
 from database_functions import resetDatabase
 
@@ -48,7 +48,7 @@ class LoginScreen(BoxLayout):
             btn.bind(on_press=partial(LoginScreen.addWidgetForRelicsOfPart, box_layout))
             btn2 = Button(text='X',size_hint_y=None,
                          height=100)
-            btn2.bind(on_press=partial(LoginScreen.addWidgetForRelicsOfPart, box_layout))
+            btn2.bind(on_press=partial(LoginScreen.removePartFromWanted, [box_layout, grid_layout, part,btn,btn2]))
 
             grid_layout.add_widget(btn)
             grid_layout.add_widget(btn2)
@@ -110,6 +110,11 @@ class LoginScreen(BoxLayout):
                 #print(attribut)
                 grid_layout.add_widget(Button(text=attribut))
         self[0].add_widget(grid_layout)
+
+    def removePartFromWanted(self, button):
+        removePartFromWanted(self[2])
+        self[1].remove_widget(self[3])
+        self[1].remove_widget(self[4])
 
 
     pass
