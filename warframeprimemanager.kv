@@ -1,49 +1,15 @@
-#:import table_wanted_functions table_wanted_functions
+<MenuScreen>:
+    BoxLayout:
+        Button:
+            text: 'Goto settings'
+            on_press: root.manager.current = 'settings'
+        Button:
+            text: 'Quit'
 
-<LoginScreen>
-    BoxLayout
-        orientation: 'vertical'
-        BoxLayout:
-            pos_hint_y: 0
-            size_hint_y: None
-            height: 70
-            TextInput:
-                id: my_textinput
-                font_size: 50
-                size_hint: .8, 1
-                text: 'default'
-            Button:
-                size_hint: .2, 1
-                text: 'Add Item'
-                on_press: table_wanted_functions.addPartsFromItemToWanted(my_textinput.text)
-        BoxLayout:
-
-            size_hint_y: None
-            height: 100
-            Button:
-                font_size: 50
-                text: 'Wanted'
-                on_press: root.addWidgetForPartsInWanted()
-            Button:
-                font_size: 50
-                text: 'Relics'
-                on_press: root.addWidgetForRelic()
-        ScrollView:
-            GridLayout:
-                id: text_Box
-                cols: 1
-                size_hint_y: None
-                spacing: 10
-                padding: 10
-                height: self.minimum_height
-                canvas:
-                    Color:
-                        rgb: 0.5, 0.5, 0.5
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
-
-
-
-
-
+<SettingsScreen>:
+    BoxLayout:
+        Button:
+            text: 'My settings button'
+        Button:
+            text: 'Back to menu'
+            on_press: root.manager.current = 'menu'

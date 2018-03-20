@@ -1,6 +1,8 @@
-from database_functions import db, qr
 from other import getListOfPartsFromItem
+from tinydb import TinyDB, Query
 
+db = TinyDB('db_wanted.json')
+qr = Query()
 
 def addPartsFromItemToWanted(item):
     #print(item)

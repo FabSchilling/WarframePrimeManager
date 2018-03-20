@@ -26,3 +26,10 @@ def printRelicList(relic_List, vaubose = False):
     else:
         for relic in relic_List:
             print("tier: "+ relic[0] + " type: " + relic[1])
+
+#def sortRelics(list_of_relics):
+ #   test = []
+  #  tier_list = ['Lith', 'Meso', 'Neo', 'Axi']
+   # for tier in tier_list:
+    #    for relic in list_of_relics:
+     #       if tier == relic[0]:
