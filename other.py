@@ -6,7 +6,6 @@ def getListOfPartsFromItem(item):
     if (item != []):
         item_data = db.search((qr.name == item) & ((qr.table == "warframe") | (qr.table == "primary") | (
                     qr.table == "secondary") | (qr.table == "melee") | (qr.table == "companions") | (qr.table == "archwings")))
-        #print(item_data)
         if(item_data != []):
             if (item_data[0]["part1"] != []):
                 parts.append(item_data[0]["part1"])
@@ -22,7 +21,6 @@ def getListOfPartsFromItem(item):
                                     parts.append(item_data[0]["part6"])
                                     if (item_data[0]["part7"] != []):
                                         parts.append(item_data[0]["part7"])
-        #print(parts)
     return(parts)
 
 '''

@@ -5,23 +5,24 @@ from database_functions import resetDatabase
 
 from kivy.lang import Builder
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
 
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.button import Button
+
+
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.togglebutton import ToggleButton
 
 
-from kivy.uix.recyclegridlayout import RecycleGridLayout
-
-from kivy.metrics import dp
 
 from functools import partial
 
 Builder.load_file('./warframeprimemanager.kv')
 
 class LoginScreen(Screen):
+
+    def __init__(self, **kwargs):
+        super(LoginScreen, self).__init__(**kwargs)
+        LoginScreen.addWidgetForPartsInWanted(self)
+
 
     def addWidgetForPartsInWanted(self, *args):
         box_layout = self.ids['text_Box']
@@ -116,9 +117,9 @@ class LoginScreen(Screen):
                 elif counter == 2:
                     btn = gui_functions.createDefaultButton(attribute[0], width=0.1)
                 elif counter == 3:
-                    btn = gui_functions.createDefaultButton(attribute, width=0.7)
+                    btn = gui_functions.createDefaultButton(attribute[:25], width=0.7)
                 else:
-                    btn = gui_functions.createDefaultButton(attribute[:25], width=0.1)
+                    btn = gui_functions.createDefaultButton(attribute, width=0.1)
                 grid_layout.add_widget(btn)
                 counter += 1
         self[0].add_widget(grid_layout)
@@ -129,10 +130,7 @@ class LoginScreen(Screen):
         self[1].remove_widget(self[4])
 
 
-    pass
 
-class ScreenOne(Screen):
-    pass
 
 
 
@@ -144,7 +142,6 @@ class ScreenTwo(Screen):
         #grid_layout1 = self.ids['grid0']
         #grid_layout1.data = [{'text': str(x)} for x in range(100)]
         for i in range(4):
-            print(i)
             grid_layout1 = self.ids['grid' + str(i)]
             for relic in relic_list[i]:
                 if relic_functions.isRelicInRelicDB(tier_list[i], relic):
@@ -152,16 +149,11 @@ class ScreenTwo(Screen):
                 else:
                     btn = ToggleButton(text=relic)
                 btn.bind(on_press=partial(ScreenTwo.relicButton, btn, tier_list[i], relic))
-                #btn.bind(on_release=partial(ScreenTwo.test2, tier_list[i], relic))
                 grid_layout1.add_widget(btn)
         self.name = name
 
     def relicButton(btn, tier, type, self):
-        print(tier)
-        print(type)
-
         state = btn.state
-        print(state)
         if state == "down":
             relic_functions.addRelicToRelicDB(tier, type)
         elif state == "normal":

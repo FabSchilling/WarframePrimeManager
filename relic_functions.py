@@ -55,7 +55,6 @@ def removeRelicFromRelicDB(tier, type):
 
 def isRelicInRelicDB(tier, type):
     test_query = db_relic.search((qr.tier == tier) & (qr.type == type))
-    #print(test_query)
 
     if test_query != []:
         return True
@@ -63,9 +62,7 @@ def isRelicInRelicDB(tier, type):
 
 def getFilteredRelicList(tier = False):
     filter_relic_list = []
-    print(table_wanted_functions.getListOfPartsFromWanted())
     relic_list = table_wanted_functions.getListOfRelicsForListOfParts(table_wanted_functions.getListOfPartsFromWanted())
-    #print(relic_list)
     if tier == False:
         for relic in relic_list:
             if isRelicInRelicDB(relic[0], relic[1]):

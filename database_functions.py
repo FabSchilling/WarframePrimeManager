@@ -1,4 +1,7 @@
 import json
+import os
+import tarfile
+from six.moves import urllib
 
 from tinydb import TinyDB, Query
 
@@ -35,7 +38,6 @@ def saveRelationshipsToDatabase(data):
                                     part6 = item["parts"][5]['name']
                                     if (part_Number > 6):
                                         part7 = item["parts"][6]['name']
-            #print(part1)
             db.insert({'table': typ, 'name': item['name'], 'part1': part1, 'part2': part2, 'part3': part3, 'part4': part4, 'part5': part5, 'part6': part6, 'part7': part7})
 
 
@@ -43,6 +45,11 @@ def resetDatabase():
     db.purge()
     saveRelationshipsToDatabase(loadDataFromJSON("./relationship.json"))
     saveRelicDataToDatabase(loadDataFromJSON('./allinone.json'))
+
+
+def updateDatabase():
+    download_Path = "https://destiny.trade/JSON/allinone.json"
+    urllib.request.urlretrieve(download_Path, "./allinone.json")
 
 
 

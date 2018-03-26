@@ -7,7 +7,7 @@
         orientation: 'vertical'
 
         BoxLayout:
-            size_hint_y: .05
+            size_hint_y: .075
             Button:
                 text: "Relic Filter"
                 on_press:
@@ -20,6 +20,7 @@
             size_hint_y: None
             height: dp(70)
             TextInput:
+                multiline: False
                 id: my_textinput
                 font_size: dp(50)
                 size_hint: .8, 1
@@ -55,31 +56,11 @@
                         pos: self.pos
                         size: self.size
 
-<ScreenOne>:
-    BoxLayout:
-        size_hint_y: .05
-        Button:
-            text: "Go to Screen 2"
-            on_press:
-                root.manager.transition.direction = "left"
-                root.manager.transition.duration = 2
-                root.manager.current = "screen_two"
-
-    GridLayout:
-        cols: 7
-
-        Button:
-            text: "test"
-
-
-
-
-
 <ScreenTwo>:
     BoxLayout:
         orientation: "vertical"
         BoxLayout:
-            size_hint_y: .05
+            size_hint_y: .07
             Button:
                 text: "Go to Screen 1"
                 on_press:
@@ -103,12 +84,13 @@
                         text: "Lith"
                         ScrollView:
                             GridLayout:
+                                size_hint_x: .85
                                 size_hint_y: None
                                 spacing: dp(10)
                                 padding: dp(10)
                                 height: self.minimum_height
                                 cols: 4
-                                row_default_height: (Window.width - dp(60))/4
+                                row_default_height: (Window.width * .85 - dp(60))/4
                                 id: grid0
 
 
@@ -118,12 +100,13 @@
                         text: "Meso"
                         ScrollView:
                             GridLayout:
+                                size_hint_x: .85
                                 size_hint_y: None
                                 spacing: dp(10)
                                 padding: dp(10)
                                 height: self.minimum_height
                                 cols: 4
-                                row_default_height: (Window.width - dp(60))/4
+                                row_default_height: (Window.width * .85 - dp(60))/4
                                 id: grid1
 
 
@@ -131,31 +114,30 @@
                         text: "Neo"
                         ScrollView:
                             GridLayout:
+                                size_hint_x: .85
                                 size_hint_y: None
                                 spacing: dp(10)
                                 padding: dp(10)
                                 height: self.minimum_height
                                 cols: 4
-                                row_default_height: (Window.width - dp(60))/4
+                                row_default_height: (Window.width * .85 - dp(60))/4
                                 id: grid2
 
                     TabbedPanelItem:
                         text: "Axi"
                         ScrollView:
                             GridLayout:
+                                size_hint_x: .85
                                 size_hint_y: None
                                 spacing: dp(10)
                                 padding: dp(10)
                                 height: self.minimum_height
                                 cols: 4
-                                row_default_height: (Window.width - dp(60))/4
+                                row_default_height: (Window.width * .85 - dp(60))/4
                                 id: grid3
 
 
 
 
-
-<MyRecycleGridLayout@RecycleGridLayout>:
-    rows: 7
 
 
