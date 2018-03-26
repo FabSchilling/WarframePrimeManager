@@ -45,5 +45,6 @@ def resetDatabase():
     saveRelicDataToDatabase(loadDataFromJSON('./allinone.json'))
 
 
+
 db = TinyDB('db.json')
 qr = Query()
