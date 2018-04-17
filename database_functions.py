@@ -48,10 +48,12 @@ def resetDatabase():
 
 
 def updateDatabase():
-    download_Path = "https://destiny.trade/JSON/allinone.json"
-    urllib.request.urlretrieve(download_Path, "./allinone.json")
+    download_Path_allinone = "https://destiny.trade/JSON/allinone.json"
+    download_Path_relationship = "https://raw.githubusercontent.com/FabSchilling/WarframePrimeManager/develop/relationship.json"
+    urllib.request.urlretrieve(download_Path_allinone, "./allinone.json")
+    urllib.request.urlretrieve(download_Path_relationship, "./relationship.json")
 
-
+    resetDatabase()
 
 db = TinyDB('db.json')
 qr = Query()

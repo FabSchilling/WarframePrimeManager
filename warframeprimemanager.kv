@@ -1,19 +1,34 @@
-#:import table_wanted_functions table_wanted_functions
+#: import table_wanted_functions table_wanted_functions
+#: import database_functions database_functions
 #: import Window kivy.core.window.Window
 
 
-<LoginScreen>
+<LoginScreen>:
     BoxLayout:
         orientation: 'vertical'
 
         BoxLayout:
             size_hint_y: .075
+
+
+
             Button:
                 text: "Relic Filter"
                 on_press:
                     root.manager.transition.direction = "left"
                     root.manager.transition.duration = 1
                     root.manager.current = "screen_two"
+
+            Button:
+                text: "Gear"
+                size_hint_x: .1
+
+                on_press:
+                    root.manager.transition.direction = "left"
+                    root.manager.transition.duration = 1
+                    root.manager.current = "settingScreen"
+
+
 
         BoxLayout:
             pos_hint_y: 0
@@ -135,6 +150,31 @@
                                 cols: 4
                                 row_default_height: (Window.width * .85 - dp(60))/4
                                 id: grid3
+
+
+<SettingsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            size_hint_y: .075
+
+
+
+            Button:
+                text: "Relic Filter"
+                on_press:
+                    root.manager.transition.direction = "left"
+                    root.manager.transition.duration = 1
+                    root.manager.current = "screen_two"
+
+            Button:
+                text: "Gear"
+                size_hint_x: .1
+                on_press:
+                    root.manager.transition.direction = "left"
+                    root.manager.transition.duration = 1
+                    root.manager.current = "screen_one"
 
 
 

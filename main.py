@@ -161,6 +161,9 @@ class ScreenTwo(Screen):
         else:
             print("Error")
 
+class SettingsScreen(Screen):
+    pass
+
 
 
 
@@ -174,6 +177,7 @@ screen_manager = ScreenManager()
 
 screen_manager.add_widget(LoginScreen(name="screen_one"))
 screen_manager.add_widget(ScreenTwo(name="screen_two"))
+screen_manager.add_widget(SettingsScreen(name="settingScreen"))
 
 
 
