@@ -1,4 +1,4 @@
-from other import getListOfPartsFromItem
+import other
 import relic_functions
 from tinydb import TinyDB, Query
 
@@ -9,7 +9,7 @@ qr_wanted = Query()
 
 def addPartsFromItemToWanted(item):
     print(item)
-    parts = getListOfPartsFromItem(item)
+    parts = other.getListOfPartsFromItem(item)
     for part in parts:
         insertPartToWanted(part)
 

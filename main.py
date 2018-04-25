@@ -1,7 +1,7 @@
 import table_wanted_functions
 import relic_functions
 import gui_functions
-from database_functions import resetDatabase
+import database_functions
 
 from kivy.lang import Builder
 from kivy.app import App
@@ -190,7 +190,7 @@ class WarframePrimeManagerApp(App):
     def build(self):
         return screen_manager
 
-#resetDatabase()
+#database_functions.resetDatabase()
 #print(getListOfPartsFromWanted())
 if __name__ == '__main__':
     WarframePrimeManagerApp().run()
