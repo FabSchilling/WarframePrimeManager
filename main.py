@@ -103,7 +103,7 @@ class LoginScreen(Screen):
         grid_layout = gui_functions.createGridLayout([1], 4, grid_layout_row_default_height=40)
         relic_filter = ['Lith', 'Meso', 'Neo', 'Axi']
         for filter in relic_filter:
-            btn = gui_functions.createDefaultButton(filter, 40, height=40 )
+            btn = gui_functions.createDefaultButton(filter, 40, height=40)
             btn.bind(on_press=partial(LoginScreen.filterRelics, [self[0], filter]))
             grid_layout.add_widget(btn)
         self[0].add_widget(grid_layout)
@@ -131,7 +131,8 @@ class LoginScreen(Screen):
 
 
 
-
+class RelicToggleButton(ToggleButton):
+    pass
 
 
 class ScreenTwo(Screen):
@@ -139,15 +140,14 @@ class ScreenTwo(Screen):
         super(ScreenTwo, self).__init__(**kwargs)
         relic_list = relic_functions.getAllRelics()
         tier_list = ['Lith', 'Meso', 'Neo', 'Axi']
-        #grid_layout1 = self.ids['grid0']
-        #grid_layout1.data = [{'text': str(x)} for x in range(100)]
+
         for i in range(4):
             grid_layout1 = self.ids['grid' + str(i)]
             for relic in relic_list[i]:
                 if relic_functions.isRelicInRelicDB(tier_list[i], relic):
-                    btn = ToggleButton(text=relic, state = "down")
+                    btn = gui_functions.getRelicToggleButtonForTier(text=relic, state="down", tier=tier_list[i])
                 else:
-                    btn = ToggleButton(text=relic)
+                    btn = gui_functions.getRelicToggleButtonForTier(text=relic, state="normal", tier=tier_list[i])
                 btn.bind(on_press=partial(ScreenTwo.relicButton, btn, tier_list[i], relic))
                 grid_layout1.add_widget(btn)
         self.name = name
