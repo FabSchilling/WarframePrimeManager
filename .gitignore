@@ -1,8 +1,12 @@
 bin/
+/bin.sn
 __pycache__/
 venv/
 venv1/
 .buildozer/
 .idea/
 .git/
-bin.sn
+db_*
+*.pyc
+
+
