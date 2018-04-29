@@ -28,11 +28,11 @@ class StartScreen(Screen):
         box_layout.clear_widgets()
         list_of_parts = table_wanted_functions.getListOfPartsFromWanted()
 
-        grid_layout = gui_functions.createGridLayout(list_of_parts, 2)
+        grid_layout = gui_functions.getGridLayout(list_of_parts, 2)
 
         for part in list_of_parts:
-            btn = gui_functions.createDefaultButton(part)
-            btn2 = gui_functions.createDefaultButton('X', 20, 0.1)
+            btn = gui_functions.getDefaultButton(part)
+            btn2 = gui_functions.getDefaultButton('X', 20, 0.1)
 
             btn.bind(on_press=partial(StartScreen.addWidgetForRelicsOfPart, box_layout))
             btn2.bind(on_press=partial(StartScreen.removePartFromWanted, [box_layout, grid_layout, part, btn, btn2]))
@@ -48,18 +48,18 @@ class StartScreen(Screen):
         box_layout.clear_widgets()
         list_of_relics = relic_functions.getRelicForPartList([button.text])
 
-        grid_layout = gui_functions.createGridLayout(list_of_relics, 4)
+        grid_layout = gui_functions.getGridLayout(list_of_relics, 4)
         for relic in list_of_relics:
             counter = 0
             for attribute in relic:
                 if counter == 0:
-                    btn = gui_functions.createDefaultButton(attribute, width=0.15)
+                    btn = gui_functions.getDefaultButton(attribute, width=0.15)
                 elif counter == 2:
-                    btn = gui_functions.createDefaultButton(attribute[0], width=0.1)
+                    btn = gui_functions.getDefaultButton(attribute[0], width=0.1)
                 elif counter == 3:
-                    btn = gui_functions.createDefaultButton(attribute[:25], width=0.7)
+                    btn = gui_functions.getDefaultButton(attribute[:25], width=0.7)
                 else:
-                    btn = gui_functions.createDefaultButton(attribute, width=0.1)
+                    btn = gui_functions.getDefaultButton(attribute, width=0.1)
                 grid_layout.add_widget(btn)
                 counter += 1
 
@@ -72,25 +72,25 @@ class StartScreen(Screen):
         box_layout.clear_widgets()
         list_of_relics = relic_functions.getFilteredRelicList()
 
-        grid_layout = gui_functions.createGridLayout([1], 4, grid_layout_row_default_height=40)
+        grid_layout = gui_functions.getGridLayout([1], 4, grid_layout_row_default_height=40)
         relic_filter = ['Lith','Meso','Neo','Axi']
         for filter in relic_filter:
-            btn = gui_functions.createDefaultButton(filter, 40, height=40)
+            btn = gui_functions.getDefaultButton(filter, 40, height=40)
             btn.bind(on_press=partial(StartScreen.filterRelics, [box_layout, filter]))
             grid_layout.add_widget(btn)
         box_layout.add_widget(grid_layout)
-        grid_layout = gui_functions.createGridLayout(list_of_relics, 4)
+        grid_layout = gui_functions.getGridLayout(list_of_relics, 4)
         for relic in list_of_relics:
             counter = 0
             for attribute in relic:
                 if counter == 0:
-                    btn = gui_functions.createDefaultButton(attribute, width=0.15)
+                    btn = gui_functions.getDefaultButton(attribute, width=0.15)
                 elif counter == 2:
-                    btn = gui_functions.createDefaultButton(attribute[0], width=0.1)
+                    btn = gui_functions.getDefaultButton(attribute[0], width=0.1)
                 elif counter == 3:
-                    btn = gui_functions.createDefaultButton(attribute[:25], width=0.7)
+                    btn = gui_functions.getDefaultButton(attribute[:25], width=0.7)
                 else:
-                    btn = gui_functions.createDefaultButton(attribute, width=0.1)
+                    btn = gui_functions.getDefaultButton(attribute, width=0.1)
                 grid_layout.add_widget(btn)
                 counter += 1
 
@@ -99,26 +99,26 @@ class StartScreen(Screen):
     def filterRelics(self, button):
         self[0].clear_widgets()
         list_of_relics = relic_functions.getFilteredRelicList(self[1])
-        grid_layout = gui_functions.createGridLayout([1], 4, grid_layout_row_default_height=40)
+        grid_layout = gui_functions.getGridLayout([1], 4, grid_layout_row_default_height=40)
         relic_filter = ['Lith', 'Meso', 'Neo', 'Axi']
         for filter in relic_filter:
-            btn = gui_functions.createDefaultButton(filter, 40, height=40)
+            btn = gui_functions.getDefaultButton(filter, 40, height=40)
             btn.bind(on_press=partial(StartScreen.filterRelics, [self[0], filter]))
             grid_layout.add_widget(btn)
         self[0].add_widget(grid_layout)
 
-        grid_layout = gui_functions.createGridLayout(list_of_relics, 4)
+        grid_layout = gui_functions.getGridLayout(list_of_relics, 4)
         for relic in list_of_relics:
             counter = 0
             for attribute in relic:
                 if counter == 0:
-                    btn = gui_functions.createDefaultButton(attribute, width=0.15)
+                    btn = gui_functions.getDefaultButton(attribute, width=0.15)
                 elif counter == 2:
-                    btn = gui_functions.createDefaultButton(attribute[0], width=0.1)
+                    btn = gui_functions.getDefaultButton(attribute[0], width=0.1)
                 elif counter == 3:
-                    btn = gui_functions.createDefaultButton(attribute[:25], width=0.7)
+                    btn = gui_functions.getDefaultButton(attribute[:25], width=0.7)
                 else:
-                    btn = gui_functions.createDefaultButton(attribute, width=0.1)
+                    btn = gui_functions.getDefaultButton(attribute, width=0.1)
                 grid_layout.add_widget(btn)
                 counter += 1
         self[0].add_widget(grid_layout)
@@ -150,12 +150,12 @@ class ScreenTwo(Screen):
                 grid_layout1.add_widget(btn)
         self.name = name
 
-    def relicButton(btn, tier, type, self):
+    def relicButton(btn, tier, relic_type, self):
         state = btn.state
         if state == "down":
-            relic_functions.addRelicToRelicDB(tier, type)
+            relic_functions.addRelicToRelicDB(tier, relic_type)
         elif state == "normal":
-            relic_functions.removeRelicFromRelicDB(tier, type)
+            relic_functions.removeRelicFromRelicDB(tier, relic_type)
         else:
             print("Error")
 

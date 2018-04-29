@@ -22,17 +22,6 @@ def getRelicForPartList(parts, tier = False):
     return relic_list
 
 
-
-
-def printRelicList(relic_List, vaubose = False):
-    if(vaubose):
-        for relic in relic_List:
-            print("Part_Name: " + relic[3] + " tier: "+ relic[0] + " type: " + relic[1] + " rarity: " + relic[2])
-    else:
-        for relic in relic_List:
-            print("tier: "+ relic[0] + " type: " + relic[1])
-
-
 def getAllRelics():
     relic_list =[]
     query_result = db.all()
@@ -46,15 +35,15 @@ def getAllRelics():
         relic_list.append(sub_list)
     return relic_list
 
-def addRelicToRelicDB(tier, type):
-    if isRelicInRelicDB(tier, type) == False:
-        db_relic.insert({'tier': tier, 'type': type})
+def addRelicToRelicDB(tier, relic_type):
+    if isRelicInRelicDB(tier, relic_type) == False:
+        db_relic.insert({'tier': tier, 'type': relic_type})
 
-def removeRelicFromRelicDB(tier, type):
-    db_relic.remove((qr.tier == tier) & (qr.type == type))
+def removeRelicFromRelicDB(tier, relic_type):
+    db_relic.remove((qr.tier == tier) & (qr.type == relic_type))
 
-def isRelicInRelicDB(tier, type):
-    test_query = db_relic.search((qr.tier == tier) & (qr.type == type))
+def isRelicInRelicDB(tier, relic_type):
+    test_query = db_relic.search((qr.tier == tier) & (qr.type == relic_type))
 
     if test_query != []:
         return True
