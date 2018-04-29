@@ -18,7 +18,7 @@ Install trough pip
 `pip3 install tinydb`
 
 
-### How to install Buildozer for Andoid package
+### How to install Buildozer for Andoid package (not finished)
 [Offical install instruction](https://github.com/kivy/buildozer#installing-buildozer-with-python3-support)
 
 sudo apt install python-setuptools
@@ -27,4 +27,5 @@ sudo pip install --upgrade cython==0.21
 sudo dpkg --add-architecture i386
 sudo apt-get update
 sudo apt-get install build-essential ccache git libncurses5:i386 libstdc++6:i386 libgtk2.0-0:i386 libpangox-1.0-0:i386 libpangoxft-1.0-0:i386 libidn11:i386 python2.7 python2.7-dev openjdk-8-jdk unzip zlib1g-dev zlib1g:i386
+
 

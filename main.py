@@ -1,7 +1,6 @@
 import table_wanted_functions
 import relic_functions
 import gui_functions
-import database_functions
 
 from kivy.lang import Builder
 from kivy.app import App
@@ -17,11 +16,11 @@ from functools import partial
 
 Builder.load_file('./warframeprimemanager.kv')
 
-class LoginScreen(Screen):
+class StartScreen(Screen):
 
     def __init__(self, **kwargs):
-        super(LoginScreen, self).__init__(**kwargs)
-        LoginScreen.addWidgetForPartsInWanted(self)
+        super(StartScreen, self).__init__(**kwargs)
+        StartScreen.addWidgetForPartsInWanted(self)
 
 
     def addWidgetForPartsInWanted(self, *args):
@@ -35,8 +34,8 @@ class LoginScreen(Screen):
             btn = gui_functions.createDefaultButton(part)
             btn2 = gui_functions.createDefaultButton('X', 20, 0.1)
 
-            btn.bind(on_press=partial(LoginScreen.addWidgetForRelicsOfPart, box_layout))
-            btn2.bind(on_press=partial(LoginScreen.removePartFromWanted, [box_layout, grid_layout, part,btn,btn2]))
+            btn.bind(on_press=partial(StartScreen.addWidgetForRelicsOfPart, box_layout))
+            btn2.bind(on_press=partial(StartScreen.removePartFromWanted, [box_layout, grid_layout, part, btn, btn2]))
 
             grid_layout.add_widget(btn)
             grid_layout.add_widget(btn2)
@@ -77,7 +76,7 @@ class LoginScreen(Screen):
         relic_filter = ['Lith','Meso','Neo','Axi']
         for filter in relic_filter:
             btn = gui_functions.createDefaultButton(filter, 40, height=40)
-            btn.bind(on_press=partial(LoginScreen.filterRelics, [box_layout, filter]))
+            btn.bind(on_press=partial(StartScreen.filterRelics, [box_layout, filter]))
             grid_layout.add_widget(btn)
         box_layout.add_widget(grid_layout)
         grid_layout = gui_functions.createGridLayout(list_of_relics, 4)
@@ -104,7 +103,7 @@ class LoginScreen(Screen):
         relic_filter = ['Lith', 'Meso', 'Neo', 'Axi']
         for filter in relic_filter:
             btn = gui_functions.createDefaultButton(filter, 40, height=40)
-            btn.bind(on_press=partial(LoginScreen.filterRelics, [self[0], filter]))
+            btn.bind(on_press=partial(StartScreen.filterRelics, [self[0], filter]))
             grid_layout.add_widget(btn)
         self[0].add_widget(grid_layout)
 
@@ -132,8 +131,6 @@ class LoginScreen(Screen):
 
 
 
-class RelicToggleButton(ToggleButton):
-    pass
 
 
 class ScreenTwo(Screen):
@@ -176,7 +173,7 @@ class SettingsScreen(Screen):
 
 screen_manager = ScreenManager()
 
-screen_manager.add_widget(LoginScreen(name="screen_one"))
+screen_manager.add_widget(StartScreen(name="screen_one"))
 screen_manager.add_widget(ScreenTwo(name="screen_two"))
 screen_manager.add_widget(SettingsScreen(name="settingScreen"))
 

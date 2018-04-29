@@ -11,12 +11,12 @@ def getRelicForPartList(parts, tier = False):
 
     if tier == False:
         for part in parts:
-            relics_list_db = db.search((qr.table == "relic") & (qr.name == part))
+            relics_list_db = db.search(qr.name == part)
             for relics in relics_list_db:
                 relic_list.append([relics['tier'], relics['type'], relics['rarity'], relics['name']])
     else:
         for part in parts:
-            relics_list_db = db.search((qr.table == "relic") & (qr.name == part) & (qr.tier == tier))
+            relics_list_db = db.search((qr.name == part) & (qr.tier == tier))
             for relics in relics_list_db:
                 relic_list.append([relics['tier'], relics['type'], relics['rarity'], relics['name']])
     return relic_list
@@ -35,7 +35,7 @@ def printRelicList(relic_List, vaubose = False):
 
 def getAllRelics():
     relic_list =[]
-    query_result = db.search(qr.table == "relic")
+    query_result = db.all()
     for tier in ['Lith', 'Meso', 'Neo', 'Axi']:
         sub_list = []
         for relic in query_result:

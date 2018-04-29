@@ -1,4 +1,4 @@
-import other
+import database_functions
 import relic_functions
 from tinydb import TinyDB, Query
 
@@ -9,14 +9,14 @@ qr_wanted = Query()
 
 def addPartsFromItemToWanted(item):
     print(item)
-    parts = other.getListOfPartsFromItem(item)
+    parts = database_functions.getListOfPartsFromItem(item)
     for part in parts:
         insertPartToWanted(part)
 
 
 def insertPartToWanted(part):
     if(db_wanted.search(qr_wanted.name == part) == []):
-        db_wanted.insert({'tem': part.split(' Prime')[0], 'name': part})
+        db_wanted.insert({'item': part.split(' Prime')[0], 'name': part})
 
 
 def removePartFromWanted(part):
