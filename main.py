@@ -47,7 +47,7 @@ class LoginScreen(Screen):
 
     def addWidgetForRelicsOfPart(box_layout, button):
         box_layout.clear_widgets()
-        list_of_relics = relic_functions.findRelicForPartList([button.text])
+        list_of_relics = relic_functions.getRelicForPartList([button.text])
 
         grid_layout = gui_functions.createGridLayout(list_of_relics, 4)
         for relic in list_of_relics:
@@ -125,6 +125,7 @@ class LoginScreen(Screen):
         self[0].add_widget(grid_layout)
 
     def removePartFromWanted(self, button):
+        print(self[2])
         table_wanted_functions.removePartFromWanted(self[2])
         self[1].remove_widget(self[3])
         self[1].remove_widget(self[4])

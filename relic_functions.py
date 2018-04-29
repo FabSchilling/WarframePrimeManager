@@ -6,7 +6,7 @@ db_relic = TinyDB('db_relic.json')
 qr_relic = Query()
 
 
-def findRelicForPartList(parts, tier = False):
+def getRelicForPartList(parts, tier = False):
     relic_list = []
 
     if tier == False:
@@ -62,23 +62,19 @@ def isRelicInRelicDB(tier, type):
 
 def getFilteredRelicList(tier = False):
     filter_relic_list = []
-    relic_list = table_wanted_functions.getListOfRelicsForListOfParts(table_wanted_functions.getListOfPartsFromWanted())
-    if tier == False:
+    relic_list = getRelicForPartList(table_wanted_functions.getListOfPartsFromWanted())
+
+    print(relic_list)
+    if tier != False:
         for relic in relic_list:
-            if isRelicInRelicDB(relic[0], relic[1]):
+            if ((relic[0] == tier) & (isRelicInRelicDB(relic[0], relic[1]))):
                 filter_relic_list.append(relic)
+
     else:
         for relic in relic_list:
-            if (relic[0] == tier) & (isRelicInRelicDB(relic[0], relic[1])):
+            print(relic)
+            if isRelicInRelicDB(relic[0], relic[1]):
                 filter_relic_list.append(relic)
 
     return filter_relic_list
 
-
-
-#def sortRelics(list_of_relics):
- #   test = []
-  #  tier_list = ['Lith', 'Meso', 'Neo', 'Axi']
-   # for tier in tier_list:
-    #    for relic in list_of_relics:
-     #       if tier == relic[0]:

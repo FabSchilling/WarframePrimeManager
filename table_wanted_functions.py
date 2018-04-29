@@ -15,28 +15,17 @@ def addPartsFromItemToWanted(item):
 
 
 def insertPartToWanted(part):
-    if(db_wanted.search((qr_wanted.table == "wanted") & (qr_wanted.name == part)) == []):
-
-        relic_list = relic_functions.findRelicForPartList([part])
-        for relic in relic_list:
-            db_wanted.insert({'table': "relic", 'tier': relic[0], 'type': relic[1], 'rarity': relic[2], 'name': part})
-        db_wanted.insert({'table': "wanted", 'name': part})
+    if(db_wanted.search(qr_wanted.name == part) == []):
+        db_wanted.insert({'tem': part.split(' Prime')[0], 'name': part})
 
 
 def removePartFromWanted(part):
-    db_wanted.remove(((qr_wanted.table == "wanted") & (qr_wanted.name == part)))
+    db_wanted.remove(qr_wanted.name == part)
 
 
 def getListOfPartsFromWanted():
     wanted_list = []
-    wanted_list_db = db_wanted.search(qr_wanted.table == "wanted")
-    for wanted_part in wanted_list_db:
-        wanted_list.append(wanted_part['name'])
-    return wanted_list
-
-def getListOfPartsFromWanted():
-    wanted_list = []
-    wanted_list_db = db_wanted.search(qr_wanted.table == "wanted")
+    wanted_list_db = db_wanted.all()
     for wanted_part in wanted_list_db:
         wanted_list.append(wanted_part['name'])
     return wanted_list
@@ -44,7 +33,24 @@ def getListOfPartsFromWanted():
 def getListOfRelicsForListOfParts(parts):
     relic_list = []
     for part in parts:
-        relics_list_db = db_wanted.search((qr_wanted.table == "relic") & (qr_wanted.name == part))
+        relics_list_db = relic_functions.getRelicForPartList(parts)
         for relics in relics_list_db:
             relic_list.append([relics['tier'], relics['type'], relics['rarity'], relics['name']])
     return relic_list
+
+def getListOfItem():
+    item_list = []
+    wanted_list_db = db_wanted.all()
+    for part in wanted_list_db:
+        item_list.append(part['item'])
+    return set(item_list)
+
+def getListOfPartsOfItem(item):
+    part_list = []
+    part_list_db = db_wanted.search(qr_wanted.item == item)
+    print(part_list_db)
+    for parts in part_list_db:
+        part_list.append(parts['name'])
+
+    print(part_list)
+    return part_list
