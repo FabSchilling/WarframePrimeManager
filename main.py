@@ -8,9 +8,6 @@ from kivy.app import App
 
 
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.togglebutton import ToggleButton
-
-
 
 from functools import partial
 
@@ -44,55 +41,27 @@ class StartScreen(Screen):
 
         return grid_layout
 
-    def addWidgetForRelicsOfPart(box_layout, button):
-        box_layout.clear_widgets()
+    def addWidgetForRelicsOfPart(self, button):
+        self.clear_widgets()
         list_of_relics = relic_functions.getRelicForPartList([button.text])
 
-        grid_layout = gui_functions.getGridLayout(list_of_relics, 4)
-        for relic in list_of_relics:
-            counter = 0
-            for attribute in relic:
-                if counter == 0:
-                    btn = gui_functions.getDefaultButton(attribute, width=0.15)
-                elif counter == 2:
-                    btn = gui_functions.getDefaultButton(attribute[0], width=0.1)
-                elif counter == 3:
-                    btn = gui_functions.getDefaultButton(attribute[:25], width=0.7)
-                else:
-                    btn = gui_functions.getDefaultButton(attribute, width=0.1)
-                grid_layout.add_widget(btn)
-                counter += 1
+        grid_layout = gui_functions.getRelicGridFromWanted(list_of_relics)
 
-        box_layout.add_widget(grid_layout)
-
-
+        self.add_widget(grid_layout)
 
     def addWidgetForRelic(self):
         box_layout = self.ids['text_Box']
         box_layout.clear_widgets()
         list_of_relics = relic_functions.getFilteredRelicList()
 
-        grid_layout = gui_functions.getGridLayout([1], 4, grid_layout_row_default_height=40)
+        grid_layout = gui_functions.getGridLayout([1], cols = 4, grid_layout_row_default_height=40)
         relic_filter = ['Lith','Meso','Neo','Axi']
         for filter in relic_filter:
             btn = gui_functions.getDefaultButton(filter, 40, height=40)
             btn.bind(on_press=partial(StartScreen.filterRelics, [box_layout, filter]))
             grid_layout.add_widget(btn)
         box_layout.add_widget(grid_layout)
-        grid_layout = gui_functions.getGridLayout(list_of_relics, 4)
-        for relic in list_of_relics:
-            counter = 0
-            for attribute in relic:
-                if counter == 0:
-                    btn = gui_functions.getDefaultButton(attribute, width=0.15)
-                elif counter == 2:
-                    btn = gui_functions.getDefaultButton(attribute[0], width=0.1)
-                elif counter == 3:
-                    btn = gui_functions.getDefaultButton(attribute[:25], width=0.7)
-                else:
-                    btn = gui_functions.getDefaultButton(attribute, width=0.1)
-                grid_layout.add_widget(btn)
-                counter += 1
+        grid_layout = gui_functions.getRelicGridFromWanted(list_of_relics)
 
         box_layout.add_widget(grid_layout)
 
@@ -107,20 +76,7 @@ class StartScreen(Screen):
             grid_layout.add_widget(btn)
         self[0].add_widget(grid_layout)
 
-        grid_layout = gui_functions.getGridLayout(list_of_relics, 4)
-        for relic in list_of_relics:
-            counter = 0
-            for attribute in relic:
-                if counter == 0:
-                    btn = gui_functions.getDefaultButton(attribute, width=0.15)
-                elif counter == 2:
-                    btn = gui_functions.getDefaultButton(attribute[0], width=0.1)
-                elif counter == 3:
-                    btn = gui_functions.getDefaultButton(attribute[:25], width=0.7)
-                else:
-                    btn = gui_functions.getDefaultButton(attribute, width=0.1)
-                grid_layout.add_widget(btn)
-                counter += 1
+        grid_layout = gui_functions.getRelicGridFromWanted(list_of_relics)
         self[0].add_widget(grid_layout)
 
     def removePartFromWanted(self, button):
@@ -128,6 +84,8 @@ class StartScreen(Screen):
         table_wanted_functions.removePartFromWanted(self[2])
         self[1].remove_widget(self[3])
         self[1].remove_widget(self[4])
+
+
 
 
 

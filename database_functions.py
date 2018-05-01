@@ -1,4 +1,5 @@
 import json
+import vault_functions
 from six.moves import urllib
 
 from tinydb import TinyDB, Query
@@ -13,8 +14,9 @@ def updateDatabase():
     resetDatabase()
 
 def resetDatabase():
-    db.purge()
-    saveRelicDataToDatabase(loadDataFromJSON('./allinone.json'))
+    #db.purge()
+    #saveRelicDataToDatabase(loadDataFromJSON('./allinone.json'))
+    vault_functions.saveVaultedToDatabase(loadDataFromJSON('./allinone.json'))
 
 def loadDataFromJSON(path):
     json_data=open(path).read()
@@ -37,6 +39,9 @@ def getListOfPartsFromItem(item):
         parts.append(i["name"])
 
     return parts
+
+def getAllRelics():
+    return db.all()
 
 
 
