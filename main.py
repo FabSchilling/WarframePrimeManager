@@ -102,8 +102,12 @@ class ScreenTwo(Screen):
             grid_layout1 = self.ids['grid' + str(i)]
             for relic in relic_list[i]:
                 if relic_functions.isRelicInRelicDB(tier_list[i], relic):
+                    if database_functions.isRelicVaulted(tier_list[i], relic):
+                        relic = str(relic) + " ([b]V[b])"
                     btn = gui_functions.getRelicToggleButtonForTier(text=relic, state="down", tier=tier_list[i])
                 else:
+                    if database_functions.isRelicVaulted(tier_list[i], relic):
+                        relic = str(relic) + " ([b]V[b])"
                     btn = gui_functions.getRelicToggleButtonForTier(text=relic, state="normal", tier=tier_list[i])
                 btn.bind(on_press=partial(ScreenTwo.relicButton, btn, tier_list[i], relic))
                 grid_layout1.add_widget(btn)
