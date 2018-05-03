@@ -6,7 +6,7 @@ venv1/
 .buildozer/
 .idea/
 .git/
-db_*
+*.json
 *.pyc
 
 
