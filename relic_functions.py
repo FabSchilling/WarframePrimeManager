@@ -22,19 +22,6 @@ def getRelicForPartList(parts, tier = False):
     return relic_list
 
 
-def getAllRelics():
-    relic_list =[]
-    query_result = database_functions.db.all()
-    for tier in ['Lith', 'Meso', 'Neo', 'Axi']:
-        sub_list = []
-        for relic in query_result:
-            if relic["tier"] == tier:
-                sub_list.append(relic["type"])
-        sub_list = list(set(sub_list))
-        sub_list = sorted(sub_list)
-        relic_list.append(sub_list)
-    return relic_list
-
 def addRelicToRelicDB(tier, relic_type):
     if isRelicInRelicDB(tier, relic_type) == False:
         db_relic.insert({'tier': tier, 'type': relic_type})

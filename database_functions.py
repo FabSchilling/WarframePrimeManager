@@ -1,5 +1,4 @@
 import json
-import vault_functions
 import re
 from six.moves import urllib
 
@@ -15,9 +14,8 @@ def updateDatabase():
     resetDatabase()
 
 def resetDatabase():
-    #db.purge()
-    #saveRelicDataToDatabase(loadDataFromJSON('./allinone.json'))
-    vault_functions.saveVaultedToDatabase(loadDataFromJSON('./allinone.json'))
+    db.purge()
+    saveRelicDataToDatabase(loadDataFromJSON('./allinone.json'))
 
 def loadDataFromJSON(path):
     json_data=open(path).read()
@@ -27,16 +25,18 @@ def loadDataFromJSON(path):
 
 def saveRelicDataToDatabase(data):
     relic_Data = data["relicRewards"]
-    vaulted_Relics = getVaultedRelics(data)
 
-    tier = ["Lith", "Meso", "Neo", "Axi"]
+
+    tier_list = ["Lith", "Meso", "Neo", "Axi"]
     for relics in relic_Data:
         for item in relic_Data[relics]['rewards']:
-            if relic_Data[relics]['type'] in vaulted_Relics[tier.index(relic_Data[relics]['tier'])]:
-                db.insert({'tier': relic_Data[relics]['tier'], 'type': relic_Data[relics]['type'], 'name': item['name'], 'rarity': item['intact']['name'], 'vaulted': True})
-            else:
-                db.insert({'tier': relic_Data[relics]['tier'], 'type': relic_Data[relics]['type'], 'name': item['name'], 'rarity': item['intact']['name'], 'vaulted': False})
+            db.insert({'tier': relic_Data[relics]['tier'], 'type': relic_Data[relics]['type'], 'name': item['name'], 'rarity': item['intact']['name'], 'vaulted': False})
 
+    vaulted_Relics = getVaultedRelicsFromData(data)
+    #print("vaulted_Relics" + str(vaulted_Relics))
+    for tier in tier_list:
+        for relic_type in vaulted_Relics[tier_list.index(tier)]:
+            db.update({'vaulted': True}, ((qr.tier == tier) & (qr.type == relic_type)))
 
 
 def getListOfPartsFromItem(item):
@@ -47,11 +47,8 @@ def getListOfPartsFromItem(item):
 
     return parts
 
-def getAllRelics():
-    return db.all()
 
-
-def getVaultedRelics(data):
+def getVaultedRelicsFromData(data):
     relic_data = getAllRelics()
     not_vaulted_relics = [[], [], [], []]
     vaulted_relics = relic_data
@@ -71,15 +68,29 @@ def getVaultedRelics(data):
         elif match[:3] == 'Axi':
             if match[4:6] in relic_data[3]:
                 not_vaulted_relics[3].append(match[4:6])
-
     not_vaulted_relics = [list(set(not_vaulted_relics[0])), list(set(not_vaulted_relics[1])), list(set(not_vaulted_relics[2])), list(set(not_vaulted_relics[3]))]
-
     count = 0
     for tier in not_vaulted_relics:
-        for typ in tier:
-            vaulted_relics[count].remove(typ)
+        for type in tier:
+            vaulted_relics[count].remove(type)
         count += 1
 
     return vaulted_relics
 
 
+def getAllRelics():
+    relic_list =[]
+    query_result = db.all()
+    for tier in ['Lith', 'Meso', 'Neo', 'Axi']:
+        sub_list = []
+        for relic in query_result:
+            if relic["tier"] == tier:
+                sub_list.append(relic["type"])
+        sub_list = list(set(sub_list))
+        sub_list = sorted(sub_list)
+        relic_list.append(sub_list)
+    return relic_list
+
+def isRelicVaulted(tier, type):
+    relic = db.get((qr.tier == tier) & (qr.type == type))
+    return relic["vaulted"]

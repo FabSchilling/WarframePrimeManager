@@ -1,3 +1,4 @@
+import database_functions
 import table_wanted_functions
 import relic_functions
 import gui_functions
@@ -94,7 +95,7 @@ class StartScreen(Screen):
 class ScreenTwo(Screen):
     def __init__(self,name,**kwargs):
         super(ScreenTwo, self).__init__(**kwargs)
-        relic_list = relic_functions.getAllRelics()
+        relic_list = database_functions.getAllRelics()
         tier_list = ['Lith', 'Meso', 'Neo', 'Axi']
 
         for i in range(4):
