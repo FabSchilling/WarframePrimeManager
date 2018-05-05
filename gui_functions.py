@@ -1,5 +1,5 @@
 from kivy.uix.button import Button
-from kivy.metrics import dp
+from kivy.metrics import dp, sp
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.togglebutton import ToggleButton
 
@@ -17,7 +17,7 @@ def getGridLayout(list, cols = 1, grid_layout_row_default_height = 35):
 
 def getRelicToggleButtonForTier(text, state, tier):
     tier = tier.lower()
-    btn = ToggleButton(text="[color=000000]" + text + "[/color]", font_size=dp(30), markup=True ,state=state, border=[0, 0, 0, 0], background_normal='./gfx/relic_' + tier + '_down.png', background_down='./gfx/relic_' + tier + '.png')
+    btn = ToggleButton(text="[color=000000]" + text + "[/color]", font_size=dp(15), markup=True ,state=state, border=[0, 0, 0, 0], background_normal='./gfx/relic_' + tier + '_down.png', background_down='./gfx/relic_' + tier + '.png')
 
     return btn
 

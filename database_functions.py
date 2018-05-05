@@ -33,7 +33,6 @@ def saveRelicDataToDatabase(data):
             db.insert({'tier': relic_Data[relics]['tier'], 'type': relic_Data[relics]['type'], 'name': item['name'], 'rarity': item['intact']['name'], 'vaulted': False})
 
     vaulted_Relics = getVaultedRelicsFromData(data)
-    #print("vaulted_Relics" + str(vaulted_Relics))
     for tier in tier_list:
         for relic_type in vaulted_Relics[tier_list.index(tier)]:
             db.update({'vaulted': True}, ((qr.tier == tier) & (qr.type == relic_type)))

@@ -43,6 +43,4 @@ def getListOfPartsOfItem(item):
     print(part_list_db)
     for parts in part_list_db:
         part_list.append(parts['name'])
-
-    print(part_list)
     return part_list

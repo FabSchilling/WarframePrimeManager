@@ -88,10 +88,6 @@ class StartScreen(Screen):
 
 
 
-
-
-
-
 class ScreenTwo(Screen):
     def __init__(self,name,**kwargs):
         super(ScreenTwo, self).__init__(**kwargs)

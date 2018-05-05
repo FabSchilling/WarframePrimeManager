@@ -4,7 +4,7 @@
 Kivy 1.10.0
 TinyDB
 ### How to install Kivy
-[Offical install instruction](https://kivy.org/docs/installation/installation-linux.html)
+[Official install instruction](https://kivy.org/docs/installation/installation-linux.html)
 
 tldr:
 1. Add PPAs for stable build:
@@ -19,7 +19,7 @@ Install trough pip
 
 
 ### How to install Buildozer for Andoid package (not finished)
-[Offical install instruction](https://github.com/kivy/buildozer#installing-buildozer-with-python3-support)
+[Official install instruction](https://github.com/kivy/buildozer#installing-buildozer-with-python3-support)
 
 sudo apt install python-setuptools
 sudo apt-get install zlib1g-dev

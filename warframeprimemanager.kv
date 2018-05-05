@@ -21,13 +21,11 @@
                     root.manager.current = "screen_two"
 
             Button:
-                text: "Gear"
-                size_hint_x: .1
+                text: "Update"
+                size_hint_x: .15
 
-                on_press:
-                    root.manager.transition.direction = "left"
-                    root.manager.transition.duration = 1
-                    root.manager.current = "settingScreen"
+                on_press: database_functions.updateDatabase()
+
 
 
 
@@ -152,30 +150,6 @@
                                 row_default_height: (Window.width * .85 - dp(60))/4
                                 id: grid3
 
-
-<SettingsScreen>:
-    BoxLayout:
-        orientation: 'vertical'
-
-        BoxLayout:
-            size_hint_y: .075
-
-
-
-            Button:
-                text: "Relic Filter"
-                on_press:
-                    root.manager.transition.direction = "left"
-                    root.manager.transition.duration = 1
-                    root.manager.current = "screen_two"
-
-            Button:
-                text: "Gear"
-                size_hint_x: .1
-                on_press:
-                    root.manager.transition.direction = "left"
-                    root.manager.transition.duration = 1
-                    root.manager.current = "screen_one"
 
 
 
