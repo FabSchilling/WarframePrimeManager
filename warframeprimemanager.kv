@@ -1,0 +1,158 @@
+#: import table_wanted_functions table_wanted_functions
+#: import database_functions database_functions
+#: import Window kivy.core.window.Window
+
+
+
+<StartScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            size_hint_y: .075
+
+
+
+            Button:
+                text: "Relic Filter"
+                on_press:
+                    root.manager.transition.direction = "left"
+                    root.manager.transition.duration = 1
+                    root.manager.current = "screen_two"
+
+            Button:
+                text: "Update"
+                size_hint_x: .15
+
+                on_press: database_functions.updateDatabase()
+
+
+
+
+        BoxLayout:
+            pos_hint_y: 0
+            size_hint_y: None
+            height: dp(70)
+            TextInput:
+                multiline: False
+                id: my_textinput
+                font_size: dp(50)
+                size_hint: .8, 1
+                text: 'default'
+            Button:
+                size_hint: .2, 1
+                text: 'Add Item'
+                on_press: table_wanted_functions.addPartsFromItemToWanted(my_textinput.text)
+        BoxLayout:
+
+            size_hint_y: None
+            height: 100
+            Button:
+                font_size: 50
+                text: 'Wanted'
+                on_press: root.addWidgetForPartsInWanted()
+            Button:
+                font_size: 50
+                text: 'Relics'
+                on_press: root.addWidgetForRelic()
+        ScrollView:
+            GridLayout:
+                id: text_Box
+                cols: 1
+                size_hint_y: None
+                spacing: 10
+                padding: 10
+                height: self.minimum_height
+                canvas:
+                    Color:
+                        rgb: 0.5, 0.5, 0.5
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+<ScreenTwo>:
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            size_hint_y: .07
+            Button:
+                text: "Go to Screen 1"
+                on_press:
+                    root.manager.transition.direction = "right"
+                    root.manager.transition.duration = 1
+                    root.manager.current = "screen_one"
+
+        ScrollView:
+
+
+            BoxLayout:
+                orientation: "horizontal"
+
+
+                TabbedPanel:
+                    tab_width: Window.width/4 - dp(1.3)
+                    do_default_tab: False
+
+
+                    TabbedPanelItem:
+                        text: "Lith"
+                        ScrollView:
+                            GridLayout:
+                                size_hint_x: .85
+                                size_hint_y: None
+                                spacing: dp(10)
+                                padding: dp(10)
+                                height: self.minimum_height
+                                cols: 4
+                                row_default_height: (Window.width * .85 - dp(60))/4
+                                id: grid0
+
+
+
+
+                    TabbedPanelItem:
+                        text: "Meso"
+                        ScrollView:
+                            GridLayout:
+                                size_hint_x: .85
+                                size_hint_y: None
+                                spacing: dp(10)
+                                padding: dp(10)
+                                height: self.minimum_height
+                                cols: 4
+                                row_default_height: (Window.width * .85 - dp(60))/4
+                                id: grid1
+
+
+                    TabbedPanelItem:
+                        text: "Neo"
+                        ScrollView:
+                            GridLayout:
+                                size_hint_x: .85
+                                size_hint_y: None
+                                spacing: dp(10)
+                                padding: dp(10)
+                                height: self.minimum_height
+                                cols: 4
+                                row_default_height: (Window.width * .85 - dp(60))/4
+                                id: grid2
+
+                    TabbedPanelItem:
+                        text: "Axi"
+                        ScrollView:
+                            GridLayout:
+                                size_hint_x: .85
+                                size_hint_y: None
+                                spacing: dp(10)
+                                padding: dp(10)
+                                height: self.minimum_height
+                                cols: 4
+                                row_default_height: (Window.width * .85 - dp(60))/4
+                                id: grid3
+
+
+
+
+
+
+

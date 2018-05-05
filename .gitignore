@@ -1,0 +1,12 @@
+bin/
+/bin.sn
+__pycache__/
+venv/
+venv1/
+.buildozer/
+.idea/
+.git/
+*.json
+*.pyc
+
+
