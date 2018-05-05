@@ -2,6 +2,7 @@ import database_functions
 import table_wanted_functions
 import relic_functions
 import gui_functions
+import os.path
 
 from kivy.lang import Builder
 from kivy.app import App
@@ -127,11 +128,11 @@ class SettingsScreen(Screen):
 
 
 
-
+if(os.path.isfile("./allinone.json") == False):
+    database_functions.updateDatabase()
 
 
 screen_manager = ScreenManager()
-
 screen_manager.add_widget(StartScreen(name="screen_one"))
 screen_manager.add_widget(ScreenTwo(name="screen_two"))
 screen_manager.add_widget(SettingsScreen(name="settingScreen"))
@@ -148,7 +149,6 @@ class WarframePrimeManagerApp(App):
         return screen_manager
 
 #database_functions.resetDatabase()
-#print(getListOfPartsFromWanted())
 if __name__ == '__main__':
     WarframePrimeManagerApp().run()
 
