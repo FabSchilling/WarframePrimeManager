@@ -4,6 +4,7 @@ import relic_functions
 import gui_functions
 import os.path
 
+
 from kivy.lang import Builder
 from kivy.app import App
 
@@ -121,7 +122,6 @@ class ScreenTwo(Screen):
 
 class SettingsScreen(Screen):
     pass
-
 
 
 

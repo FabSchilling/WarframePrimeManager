@@ -1,7 +1,6 @@
 import json
 import re
-from kivy.network.urlrequest import UrlRequest
-
+from six.moves import urllib 
 
 from tinydb import TinyDB, Query
 
@@ -11,12 +10,7 @@ qr = Query()
 
 def updateDatabase():
     download_Path_allinone = "https://destiny.trade/JSON/allinone.json"
-    UrlRequest(download_Path_allinone, on_success=test)
-
-def test(req, result):
-    with open("allinone.json", "w") as outfile:
-        json.dump(result, outfile)
-    resetDatabase()
+    urllib.request.urlretrieve(download_Path_allinone, "./allinone.json")
 
 
 def resetDatabase():
