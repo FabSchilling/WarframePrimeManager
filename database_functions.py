@@ -26,12 +26,11 @@ def loadDataFromJSON(path):
 def saveRelicDataToDatabase(data):
     relic_Data = data["relicRewards"]
 
-
     tier_list = ["Lith", "Meso", "Neo", "Axi"]
     for relics in relic_Data:
         for item in relic_Data[relics]['rewards']:
             db.insert({'tier': relic_Data[relics]['tier'], 'type': relic_Data[relics]['type'], 'name': item['name'], 'rarity': item['intact']['name'], 'vaulted': False})
-
+    
     vaulted_Relics = getVaultedRelicsFromData(data)
     for tier in tier_list:
         for relic_type in vaulted_Relics[tier_list.index(tier)]:

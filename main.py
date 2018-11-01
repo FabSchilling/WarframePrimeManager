@@ -85,8 +85,7 @@ class StartScreen(Screen):
     def removePartFromWanted(self, button):
         print(self[2])
         table_wanted_functions.removePartFromWanted(self[2])
-        self[1].remove_widget(self[3])
-        self[1].remove_widget(self[4])
+        gui_functions.removePartFromWanted(self)
 
 
 

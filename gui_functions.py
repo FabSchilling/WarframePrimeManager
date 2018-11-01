@@ -10,7 +10,7 @@ def getDefaultButton(text, fontsize = 20, width = 1, height = 35):
     return btn
 
 def getGridLayout(list, cols = 1, grid_layout_row_default_height = 35):
-    grid_layout_height = len(list) * (grid_layout_row_default_height + dp(2)) + dp (4)
+    grid_layout_height = len(list) * (grid_layout_row_default_height + 2) + 4
     grid_layout = GridLayout(cols=cols, row_force_default=True, row_default_height=dp(grid_layout_row_default_height),
                              size_hint_y=None, height=dp(grid_layout_height), spacing = dp(2), padding= dp(2))
     return grid_layout
@@ -39,3 +39,8 @@ def getRelicGridFromWanted(list_of_relics):
             grid_layout.add_widget(btn)
             counter += 1
     return grid_layout
+
+def removePartFromWanted(self):
+    self[1].remove_widget(self[3])
+    self[1].remove_widget(self[4])
+    self[1].height=self[1].height - dp(37)
