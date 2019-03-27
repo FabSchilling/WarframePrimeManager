@@ -113,9 +113,9 @@ class ScreenTwo(Screen):
     def relicButton(btn, tier, relic_type, self):
         state = btn.state
         if state == "down":
-            relic_functions.addRelicToRelicDB(tier, relic_type)
+            relic_functions.addRelicToRelicDB(tier, relic_type[0:2])
         elif state == "normal":
-            relic_functions.removeRelicFromRelicDB(tier, relic_type)
+            relic_functions.removeRelicFromRelicDB(tier, relic_type[0:2])
         else:
             print("Error")
 
@@ -127,7 +127,7 @@ class SettingsScreen(Screen):
 
 
 
-if(os.path.isfile("./allinone.json") == False):
+if(os.path.isfile("./db.json") == False):
     database_functions.updateDatabase()
 
 

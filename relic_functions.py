@@ -13,24 +13,24 @@ def getRelicForPartList(parts, tier = False):
         for part in parts:
             relics_list_db = database_functions.db.search(database_functions.qr.name == part)
             for relics in relics_list_db:
-                relic_list.append([relics['tier'], relics['type'], relics['rarity'], relics['name']])
+                relic_list.append([relics['tier'], relics['relicName'], relics['rarity'], relics['name']])
     else:
         for part in parts:
             relics_list_db = database_functions.db.search((database_functions.name == part) & (database_functions.qr.tier == tier))
             for relics in relics_list_db:
-                relic_list.append([relics['tier'], relics['type'], relics['rarity'], relics['name']])
+                relic_list.append([relics['tier'], relics['relicName'], relics['rarity'], relics['name']])
     return relic_list
 
 
 def addRelicToRelicDB(tier, relic_type):
     if isRelicInRelicDB(tier, relic_type) == False:
-        db_relic.insert({'tier': tier, 'type': relic_type})
+        db_relic.insert({'tier': tier, 'relicName': relic_type})
 
 def removeRelicFromRelicDB(tier, relic_type):
-    db_relic.remove((database_functions.qr.tier == tier) & (database_functions.qr.type == relic_type))
+    db_relic.remove((database_functions.qr.tier == tier) & (database_functions.qr.relicName == relic_type))
 
 def isRelicInRelicDB(tier, relic_type):
-    test_query = db_relic.search((database_functions.qr.tier == tier) & (database_functions.qr.type == relic_type))
+    test_query = db_relic.search((database_functions.qr.tier == tier) & (database_functions.qr.relicName == relic_type))
 
     if test_query != []:
         return True
